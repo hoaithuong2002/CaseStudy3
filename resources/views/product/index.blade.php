@@ -48,7 +48,7 @@
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->description}}</td>
                                     <td>{{$product->content}}</td>
-                                    <td>{{$product->image}}</td>
+                                    <td>{{asset('storage/' .$product->image)}}</td>
                                     <td>{{$product->price}}</td>
                                     <td>
                                         <a href="{{route('product.edit', $product -> id)}}"
