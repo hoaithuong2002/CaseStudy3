@@ -7,6 +7,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -24,6 +25,7 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
+//        dd($request);
         $product= new Product();
         $product->fill($request->all());
 
@@ -32,6 +34,10 @@ class ProductController extends Controller
 
         $product->save();
         toastr()->success('Congratulations on your successful creation!!!');
+        if ($request->hasFile('image')){
+            $file=$request->file('image');
+            $file->storeAs('public/avatars', 'anh_' . $product->id);
+        }
         return redirect()->route('product.index');
     }
 
@@ -54,7 +60,16 @@ class ProductController extends Controller
     public function destroy($id):RedirectResponse
     {
         $product = Product::findOrFail($id);
-        $product->delete();
+        try {
+            $product=$this->productService->getByID($id);
+            Storage::disk('public')->delete($product->image);
+            $product->roles()->detach();
+            $product->delete();
+            DB::commit();
+        }catch (\Exception $exception){
+            DB::rollBack();
+            \toastr()->error('chuc nang bi loi , lien he admin');
+        }
         toastr()->success('You have remove to public!');
         return redirect()->route('product.index');
 

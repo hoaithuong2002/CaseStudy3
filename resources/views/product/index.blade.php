@@ -48,7 +48,7 @@
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->description}}</td>
                                     <td>{{$product->content}}</td>
-                                    <td>{{asset('storage/' .$product->image)}}</td>
+                                    <td><img src="{{asset('storage/' .$product->image)}}" width="200px" alt=""></td>
                                     <td>{{$product->price}}</td>
                                     <td>
                                         <a href="{{route('product.edit', $product -> id)}}"
@@ -80,6 +80,7 @@
                 </div>
                 <!-- /.card -->
             </div>
+        </div>
         </div>
     </section>
 @endsection
