@@ -88,7 +88,7 @@
             <!-- /.row -->
 
             <!-- Main row -->
-                <!-- /.row -->
+            <!-- /.row -->
         </div><!--/. container-fluid -->
     </section>
     <!-- /.content -->

@@ -1,12 +1,14 @@
 @extends('layout.master')
 @section('content')
-        <section class="content">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <a href="{{route('user.create')}}" class="btn btn-success">Thêm mới người dùng</a>
-                            <form action="" class="card-tools">
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title"></h3>
+                        <a href="{{route('user.create')}}" class="btn btn-success">add a new user</a>
+                        <div class="card-tools">
+                            <form action="{{route('user.search')}}" method="post">
                                 @csrf
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 150px;">
@@ -32,7 +34,7 @@
                                     <th>Số thứ tự</th>
                                     <th>Ho va ten</th>
                                     <th>Địa chỉ email</th>
-                                    <th>Tùy chọn </th>
+                                    <th>Tùy chọn</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -42,10 +44,10 @@
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->email}}</td>
                                         <td>
-                                            <a href="{{route('user.update',$user->id)}}" class="btn btn-primary">Chỉnh sửa</a>
-                                            <a onclick="return confirm('Bạn có chắc chắn muốn xóa không?')"
+                                            <a href="{{route('user.update',$user->id)}}" class="btn btn-primary">Update</a>
+                                            <a onclick="return confirm('Bạn có chắc chắn muốn xóa {{$user->name}} không???')"
                                                href="{{route('user.delete',$user->id)}}"
-                                               class="btn btn-danger">Xóa</a>
+                                               class="btn btn-danger fa fa-trash" aria-hidden="true">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -55,10 +57,13 @@
                                     <th>Số thứ tự</th>
                                     <th>Ho va ten</th>
                                     <th>Địa chỉ email</th>
-                                    <th>Tùy chọn </th>
+                                    <th>Tùy chọn</th>
                                 </tr>
                                 </tfoot>
                             </table>
+                            <div class="d-flex justify-content-center">
+                                {{ $users->links() }}
+                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -68,6 +73,7 @@
                 </div>
                 <!-- /.col -->
             </div>
-            <!-- /.row -->
-        </section>
+        </div>
+        <!-- /.row -->
+    </section>
 @endsection

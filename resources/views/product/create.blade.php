@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layout.master')
 @section('content')
     <section class="content">
         <form method="post" action="{{route('product.store')}}" enctype="multipart/form-data">
@@ -7,7 +7,7 @@
                 <div class="col-md-12 col-md-6">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Add New Product</h3>
+                            <h3 class="card-title" >Add New Product</h3>
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse"
                                         data-toggle="tooltip" title="Collapse">
@@ -53,7 +53,7 @@
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success"> Add</button>
-                                <a href="{{route("product")}}" class="btn btn-secondary">Cancel</a>
+                                <a href="{{route('product.index')}}" class="btn btn-secondary">Cancel</a>
                             </div>
                         </div>
                         <!-- /.card-body -->

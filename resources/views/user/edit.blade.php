@@ -14,12 +14,12 @@
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label >Tên người dùng</label>
-                                    <input type="name" name="name" value="{{ $user->name }}" class="form-control" >
+                                    <label>Tên người dùng</label>
+                                    <input type="name" name="name" value="{{ $user->name }}" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label >Địa chỉ email</label>
-                                    <input type="email" name="email" value="{{ $user->email }}" class="form-control" >
+                                    <label>Địa chỉ email</label>
+                                    <input type="email" name="email" value="{{ $user->email }}" class="form-control">
                                 </div>
                             </div>
                             <!-- /.card-body -->

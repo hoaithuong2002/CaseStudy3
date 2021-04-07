@@ -27,12 +27,24 @@
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">Đăng nhập để bắt đầu sử dụng</p>
+            <!-- Hiển thị trạng thái chưa đăng nhập -->
+            @if (Session::has('not-login'))
+                <div class="not-login">
+                    <p class="text-danger">{{ Session::get('not-login') }}</p>
+                </div>
+            @endif
+        <!-- Hiển thị trạng thái chưa đăng nhập -->
+            @if (Session::has('not-login'))
+                <div class="not-login">
+                    <p class="text-danger">{{ Session::get('not-login') }}</p>
+                </div>
+            @endif
             @if(\Illuminate\Support\Facades\Session::has('login-error'))
                 <div class="alert alert-danger">
                     {{ \Illuminate\Support\Facades\Session::get('login-error') }}
                 </div>
             @endif
-            <form  method="post">
+            <form method="post">
                 @csrf
                 <div class="input-group mb-3">
                     <input type="email" name="email" class="form-control" placeholder="Email">
@@ -72,7 +84,7 @@
 <!-- Bootstrap 4 -->
 <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
-<script {{asset('js/adminlte.min.js')}}"></script>
+<script {{asset('js/adminlte.min.js')}}></script>
 
 </body>
 </html>
