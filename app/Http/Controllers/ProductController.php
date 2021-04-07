@@ -26,6 +26,10 @@ class ProductController extends Controller
     {
         $product= new Product();
         $product->fill($request->all());
+
+        $path = $request->file('image')->store('avatars','public');
+        $product->image = $path;
+
         $product->save();
         toastr()->success('Congratulations on your successful creation!!!');
         return redirect()->route('product.index');
@@ -43,12 +47,6 @@ class ProductController extends Controller
         $product->fill($request->all());
         $product->save();
         toastr()->success('You have successfully updated your information!!!');
-        if ($request->hasFile('img')){
-            Storage::disk('public')->delete($product->img);
-            $path = $this->updateFile($request,'img','product');
-            $product->img = $path;
-        }
-        toastr()->success('You have successfully updated your photo!');
         sleep(3);
         return redirect()->route('product');
     }

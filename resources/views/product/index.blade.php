@@ -6,26 +6,29 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title"></h3>
-                        <a href="{{route('product.create')}}" type="submit" class="btn btn-success"> Add New Products</a>
+                        <a href="{{route('product.create')}}" class="btn btn-success">Add New Products</a>
                         <div class="card-tools">
                             <form action="{{route('product.search')}}" method="post">
                                 @csrf
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="keyword" class="form-control float-right"
-                                           placeholder="Search">
+                                <div class="card-tools">
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <input type="text" class="form-control float-right" placeholder="Search">
 
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default">
-                                            <i class="fas fa-search"></i>
-                                        </button>
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                    </div>
+                        <div class="card-header">
+                            <h3 class="card-title">List Of Products</h3>
+                        </div>
                     <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0">
-                        <table class="table table-hover text-nowrap">
+                    <div class="card-body ">
+                        <table id="example2" class="table table-bordered table-hover">
                             <thead>
                             <tr>
                                 <th>ID</th>
