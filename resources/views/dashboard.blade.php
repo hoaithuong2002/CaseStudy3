@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('back-end.layout.master')
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -62,8 +62,13 @@
                         <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Sales</span>
-                            <span class="info-box-number">760</span>
+                            <span class="info-box-text">
+                                <a href="{{route('shop.index')}}">Cart</a>
+                            </span>
+                            <span class="info-box-number">
+                                {{ DB::table('products')->count() }}
+
+                            </span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>

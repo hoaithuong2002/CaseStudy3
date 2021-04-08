@@ -14,12 +14,12 @@ class UserController extends Controller
     {
         $users = User::all();
         $users = DB::table('users')->paginate(4);
-        return view('user.index', compact('users'));
+        return view('back-end.user.index', compact('users'));
     }
 
     function create()
     {
-        return view('user.create');
+        return view('back-end.user.create');
     }
 
     function store(Request $request)
@@ -36,7 +36,7 @@ class UserController extends Controller
     function update($id)
     {
         $user = User::find($id);
-        return view('user.edit', compact('user'));
+        return view('back-end.user.edit', compact('user'));
     }
 
     function edit($id, Request $request)
@@ -61,7 +61,7 @@ class UserController extends Controller
     {
         $search = $request->keyword;
         $users = DB::table('users')->where('name', 'LIKE', "%$search%")->paginate(4);
-        return view('user.index', compact('users'));
+        return view('back-end.user.index', compact('users'));
     }
 
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -30,10 +31,10 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         Route::get('/{id}/update', [UserController::class, 'update'])->name('user.update');
         Route::post('/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
         Route::get('/{id}/delete', [UserController::class, 'delete'])->name('user.delete');
-        Route::post('/search',[UserController::class, 'search'])->name('user.search');
+        Route::post('/search', [UserController::class, 'search'])->name('user.search');
 
     });
-    Route::prefix('product')->group(function (){
+    Route::prefix('product')->group(function () {
         Route::get('/index', [ProductController::class, 'index'])->name('product.index');
         Route::get('/create', [ProductController::class, 'create'])->name('product.create');
         Route::post('/create', [ProductController::class, 'store'])->name('product.store');
@@ -43,6 +44,19 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         Route::post('/search', [ProductController::class, 'search'])->name('product.search');
 
     });
-    Route::get('/logout',[AuthController::class,'logout'])->name('admin.logout');
+
+    Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
 });
-Route::get('/', [DashboardController::class, 'index'])->name('home');
+Route::get('/shop', [ProductController::class, 'shopProducts'])->name('shop.index');
+Route::prefix('cart')->group(function (){
+    Route::get('/', [CartController::class, 'index'])->name('cart.index');
+    Route::get('/add/{id}',[CartController::class,'addToCart'])->name('cart.add');
+    Route::get('/{id}/remove-product', [CartController::class, 'removeProduct'])->name('cart.removeProduct');
+    Route::post('/update', [CartController::class, 'updateCart'])->name('cart.update');
+    Route::get('/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
+    Route::post('/update-cart', [CartController::class, 'updateProduct']);
+});
+Route::get('check-out', [CartController::class, 'showFormCheckOut'])->name('cart.checkout');
+Route::post('check-out', [CartController::class, 'checkOut'])->name('cart.submit_checkout');
+
+Route::middleware('auth')->get('/', [DashboardController::class, 'index'])->name('home');

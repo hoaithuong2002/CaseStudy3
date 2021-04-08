@@ -14,16 +14,16 @@ class ProductController extends Controller
     public function index()
     {
         $products = DB::table('products')->paginate(4);
-        return view('product.index',compact('products'));
+        return view('back-end.product.index',compact('products'));
     }
 
     public function create()
     {
 
-        return view('product.create');
+        return view('back-end.product.create');
 
     }
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
 //        dd($request);
         $product= new Product();
@@ -44,17 +44,24 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        return view('product.edit',compact('product'));
+        return view('back-end.product.edit',compact('product'));
     }
 
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
         $product->fill($request->all());
+
+        if ($request->hasFile('image')){
+            $file=$request->file('image');
+            $file->storeAs('public/avatars', 'anh_' . $product->id);
+            $product->image = 'avatars/anh_' . $product->id;
+        }
+
         $product->save();
         toastr()->success('You have successfully updated your information!!!');
-        sleep(3);
-        return redirect()->route('product');
+        return redirect()->route('product.index');
+
     }
 
     public function destroy($id):RedirectResponse
@@ -77,10 +84,12 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
-        $search= $request->keyword;
+        $search= $request->search;
         $products = DB::table('products')->where('name','LIKE',"%$search%")->paginate(4);
-        return view('product.index',compact('products'));
+        return view('back-end.product.index',compact('products'));
     }
-
+    function shopProducts(){
+        $products = DB::table('products')->get();
+        return view('front-end.shop.index',compact('products'));    }
 
 }
