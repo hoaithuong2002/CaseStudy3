@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cart extends Model
+class Cart
 {
     public $items = [];
     public $totalQty = 0;
@@ -38,4 +38,15 @@ class Cart extends Model
         $this->totalQty++;
         $this->totalPrice += $product->price;
     }
+
+    function deleteProduct($id)
+    {
+        if (key_exists($id, $this->items)) {
+            $storeProductDelete = $this->items[$id];
+            $this->totalQty -= $storeProductDelete['totalQty'];
+            $this->totalPrice -= $storeProductDelete['totalPrice'];
+            unset($this->items[$id]);
+        }
+    }
+
 }

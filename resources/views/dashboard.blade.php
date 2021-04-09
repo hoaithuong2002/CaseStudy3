@@ -45,8 +45,12 @@
                         <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Likes</span>
-                            <span class="info-box-number">41,410</span>
+                            <span class="info-box-text">
+                                <a href="#">Bills</a>
+                            </span>
+                            <span class="info-box-number">
+                                {{DB::table('bills')->count()}}
+                            </span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -63,7 +67,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">
-                                <a href="{{route('shop.index')}}">Cart</a>
+                                <a href="{{route('cart.index')}}">Cart</a>
                             </span>
                             <span class="info-box-number">
                                 {{ DB::table('products')->count() }}
@@ -80,8 +84,12 @@
                         <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">New Members</span>
-                            <span class="info-box-number">2,000</span>
+                            <span class="info-box-text">
+                                <a href="{{route('user.index') }}">Members</a>
+                            </span>
+                            <span class="info-box-number">
+                                {{ DB::table('users')->count() }}
+                            </span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>

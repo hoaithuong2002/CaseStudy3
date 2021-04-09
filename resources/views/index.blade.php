@@ -52,7 +52,7 @@
 
                             </a></td>
                         <td><a onclick="return confirm('you definitely want to delete???')"
-                               href="{{route('proudct.destroy',$product->id)}}" class="btn btn-danger">
+                               href="{{route('product.destroy',$product->id)}}" class="btn btn-danger">
                             </a></td>
                     </tr>
                 @empty

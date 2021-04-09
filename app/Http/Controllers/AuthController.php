@@ -9,7 +9,10 @@ class AuthController extends Controller
 {
     function showLogin()
     {
-        return view('login');
+        if (!Auth::check()){
+            return view('login');
+        }
+        return redirect()->route('admin.dashboard');
     }
 
     function login(Request $request)
@@ -24,7 +27,7 @@ class AuthController extends Controller
         if (!Auth::attempt($data)) {
             return redirect()->route('login')->with('login-error', 'Tài khoản hoặc mật khẩu không đúng!');
         } else {
-            return redirect()->route('home');
+            return redirect()->route('admin.dashboard');
         }
     }
     function logout(Request $request){

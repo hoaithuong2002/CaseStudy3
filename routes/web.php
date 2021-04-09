@@ -19,10 +19,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [ProductController::class, 'shopProducts'])->name('home');
+
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('admin.login');
+
 //Route::get('/dashboard',[OrderController::class,'index']);
 Route::middleware('auth')->prefix('admin')->group(function () {
+
+    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     Route::prefix('users')->group(function () {
         Route::get('/index', [UserController::class, 'index'])->name('user.index');
@@ -47,16 +52,15 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
 });
-Route::get('/shop', [ProductController::class, 'shopProducts'])->name('shop.index');
-Route::prefix('cart')->group(function (){
+
+ Route::prefix('cart')->group(function (){
     Route::get('/', [CartController::class, 'index'])->name('cart.index');
     Route::get('/add/{id}',[CartController::class,'addToCart'])->name('cart.add');
     Route::get('/{id}/remove-product', [CartController::class, 'removeProduct'])->name('cart.removeProduct');
-    Route::post('/update', [CartController::class, 'updateCart'])->name('cart.update');
+    Route::post('/update', [CartController::class, 'deleteAllProduct'])->name('cart.deleteProduct');
     Route::get('/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
     Route::post('/update-cart', [CartController::class, 'updateProduct']);
 });
+
 Route::get('check-out', [CartController::class, 'showFormCheckOut'])->name('cart.checkout');
 Route::post('check-out', [CartController::class, 'checkOut'])->name('cart.submit_checkout');
-
-Route::middleware('auth')->get('/', [DashboardController::class, 'index'])->name('home');

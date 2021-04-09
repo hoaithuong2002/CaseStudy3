@@ -9,6 +9,8 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('css/all.min.css')}}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- icheck bootstrap -->
@@ -76,6 +78,10 @@
                     </div>
                 </div>
             </form>
+            <a href="{{ route('home') }}" class="btn btn-secondary w-100 mt-3">
+                <i class="fas fa-home"></i>
+                Trang chủ
+            </a>
         </div>
     </div>
 </div>
